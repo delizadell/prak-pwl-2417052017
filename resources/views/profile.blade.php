@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Mahasiswa</title>
-    <!-- Google Fonts Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
@@ -16,7 +15,6 @@
         }
 
         body {
-            /* Background gradasi pastel biru lembut & pink muda */
             background: linear-gradient(135deg, #e0f2fe 0%, #fae8ff 100%);
             display: flex;
             justify-content: center;
@@ -42,7 +40,6 @@
             transform: translateY(-5px);
         }
 
-        /* Lingkaran Avatar dengan nuansa biru pastel */
         .avatar {
             width: 110px;
             height: 110px;
@@ -81,7 +78,6 @@
             margin-bottom: 24px;
         }
 
-        /* Container Informasi */
         .info-group {
             display: flex;
             flex-direction: column;
@@ -134,7 +130,6 @@
 
         <div class="card-title">Kartu Profil Mahasiswa</div>
 
-        <!-- Box Data Menggunakan Variabel Controller -->
         <div class="info-group">
             <div class="info-box">
                 <span class="info-label">Nama Lengkap</span>
