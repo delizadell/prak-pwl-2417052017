@@ -2,50 +2,33 @@
 
 @section('content')
 <div style="max-width: 500px; margin: 40px auto; padding: 0 20px;">
-    <!-- Card Container -->
     <div style="background: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-radius: 20px; padding: 30px; border: 1px solid #f0f0f0;">
-        
-        <!-- Ikon / Avatar Bulat di Atas Form -->
-        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-            <div style="width: 70px; height: 70px; background: #fce7f3; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 4px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-                <svg xmlns="http://www.w3.org/2000/svg" style="height: 35px; width: 35px; color: #db2777;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-            </div>
-        </div>
+        <h2 style="text-align: center; font-size: 12px; font-weight: bold; color: #db2777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;">EDIT MATA KULIAH</h2>
 
-        <!-- Judul Form -->
-        <h2 style="text-align: center; font-size: 12px; font-weight: bold; color: #db2777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;">FORM TAMBAH MATA KULIAH</h2>
-
-        <!-- Form Input -->
-        <form action="{{ route('matakuliah.store') }}" method="POST">
+        <form action="{{ route('matakuliah.update', $mk->id) }}" method="POST">
             @csrf
-            
-            <!-- Input Nama Mata Kuliah -->
+            @method('PUT')
+
             <div style="margin-bottom: 20px;">
                 <label for="nama_mk" style="display: block; font-size: 11px; font-weight: bold; color: #4b5563; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">NAMA MATA KULIAH</label>
-                <input type="text" id="nama_mk" name="nama_mk" required placeholder="Masukkan nama mata kuliah" 
+                <input type="text" id="nama_mk" name="nama_mk" value="{{ $mk->nama_mk }}" required 
                     style="width: 100%; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 15px; font-size: 14px; color: #374151; outline: none; box-sizing: border-box;">
             </div>
 
-            <!-- Input SKS -->
             <div style="margin-bottom: 25px;">
                 <label for="sks" style="display: block; font-size: 11px; font-weight: bold; color: #4b5563; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">SKS</label>
-                <input type="number" id="sks" name="sks" required placeholder="Masukkan jumlah SKS" 
+                <input type="number" id="sks" name="sks" value="{{ $mk->sks }}" required 
                     style="width: 100%; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 15px; font-size: 14px; color: #374151; outline: none; box-sizing: border-box;">
             </div>
 
-            <!-- Tombol Simpan -->
             <button type="submit" style="width: 100%; background: #db2777; color: white; font-weight: 600; font-size: 14px; padding: 12px; border-radius: 12px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(219,39,119,0.3); margin-bottom: 12px;">
-                Simpan Data
+                Update Data
             </button>
-            
-            <!-- Tombol Kembali -->
+
             <a href="{{ route('matakuliah.index') }}" style="display: block; text-align: center; width: 100%; background: #f9fafb; color: #4b5563; text-decoration: none; font-weight: 600; font-size: 14px; padding: 12px; border-radius: 12px; border: 1px solid #e5e7eb; box-sizing: border-box;">
                 Kembali
             </a>
         </form>
-
     </div>
 </div>
 @endsection

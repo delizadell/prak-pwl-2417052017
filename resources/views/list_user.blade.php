@@ -1,47 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-10">
-        <!-- Kartu dengan sudut melengkung dan bayangan lembut -->
-        <div class="card shadow-lg border-0 rounded-4 p-4 bg-white bg-opacity-95 backdrop-blur">
-            <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
-                <div>
-                    <h3 class="fw-bold mb-1" style="color: #d63384; font-size: 1.4rem; letter-spacing: 0.5px;">DAFTAR PENGGUNA MAHASISWA</h3>
-                </div>
-                <a href="{{ route('user.create') }}" class="btn text-white fw-semibold rounded-pill px-4 py-2 shadow-sm d-flex align-items-center gap-2" style="background: linear-gradient(135deg, #d63384 0%, #e83e8c 100%); transition: 0.3s;">
-                    <span>+ Tambah Baru</span>
-                </a>
+<div style="max-width: 900px; margin: 30px auto; padding: 0 20px;">
+    <div style="background: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-radius: 16px; padding: 30px; border: 1px solid #f0f0f0;">
+
+        @if(session('success'))
+            <div style="margin-bottom: 20px; background: #d1e7dd; border: 1px solid #badbcc; color: #0f5132; padding: 12px 20px; border-radius: 10px; font-size: 14px;">
+                {{ session('success') }}
             </div>
-            
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead style="background-color: #f8f9fa; color: #495057; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">
-                        <tr>
-                            <th class="py-3 ps-4 rounded-start">ID</th>
-                            <th class="py-3">Nama Lengkap</th>
-                            <th class="py-3">NPM</th>
-                            <th class="py-3 rounded-end">Kelas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td class="ps-4 fw-bold text-muted">{{ $user->id }}</td>
-                            <td class="fw-semibold text-dark py-3">{{ $user->nama }}</td>
-                            <td class="text-secondary">{{ $user->nim }}</td>
-                            <td>
-                                <!-- Badge dengan nuansa pink pastel yang manis -->
-                                <span class="badge rounded-pill px-3 py-2 fw-medium shadow-sm" style="background: linear-gradient(135deg, #fce8ef 0%, #f5c2c7 100%); color: #842029; font-size: 0.8rem;">
-                                    {{ $user->nama_kelas }}
-                                </span>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        @endif
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;">
+            <h1 style="font-size: 18px; font-weight: bold; color: #db2777; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">DAFTAR PENGGUNA MAHASISWA</h1>
+            <a href="{{ route('user.create') }}" style="background: #db2777; color: white; text-decoration: none; font-size: 14px; font-weight: 600; padding: 10px 18px; border-radius: 10px; box-shadow: 0 4px 10px rgba(219,39,119,0.3);">
+                + Tambah Baru
+            </a>
         </div>
+
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="font-size: 12px; font-weight: 600; color: #9ca3af; text-transform: uppercase; border-bottom: 1px solid #f3f4f6;">
+                        <th style="padding: 12px 15px;">ID</th>
+                        <th style="padding: 12px 15px;">NAMA LENGKAP</th>
+                        <th style="padding: 12px 15px;">NPM</th>
+                        <th style="padding: 12px 15px;">KELAS</th>
+                        <th style="padding: 12px 15px; text-align: center;">AKSI</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 14px; color: #374151;">
+                    @forelse ($users as $user)
+                    <tr style="border-bottom: 1px solid #f9fafb;">
+                        <td style="padding: 15px; font-weight: 500; color: #111827;">{{ $user->id }}</td>
+                        <td style="padding: 15px;">{{ $user->nama }}</td>
+                        <td style="padding: 15px;">{{ $user->nim }}</td>
+                        <td style="padding: 15px;">
+                            <span style="background: #fce7f3; color: #be185d; font-weight: 600; padding: 4px 12px; border-radius: 20px; font-size: 12px;">
+                                {{ $user->nama_kelas }}
+                            </span>
+                        </td>
+                        <td style="padding: 15px; text-align: center;">
+                        
+                            <a href="{{ route('user.edit', $user->id) }}" style="color: #d97706; text-decoration: none; font-weight: 600; font-size: 13px; margin-right: 12px;">
+                                Edit
+                            </a>
+                          
+                            <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Yakin ingin menghapus data user ini?')" style="background: none; border: none; color: #dc2626; font-weight: 600; font-size: 13px; cursor: pointer;">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 30px; color: #9ca3af; font-style: italic;">
+                            Belum ada data pengguna mahasiswa.
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
 @endsection
